@@ -40,8 +40,7 @@ public class MenuConsola {
         } while (opcion != 0);
     }
 
-    // ---------- Sección 1 ----------
-    private void menuEventos() {
+    private void menuEventos() {//seccion 1
         System.out.println("\n--- ADMINISTRACIÓN DE EVENTOS ---");
         System.out.println("1. Registrar evento\n2. Consultar evento por clave\n3. Actualizar evento");
         System.out.println("4. Eliminar evento\n5. Mostrar todos los eventos\n0. Regresar");
@@ -77,8 +76,7 @@ public class MenuConsola {
         }
     }
 
-    // ---------- Sección 2 ----------
-    private void menuParticipantes() {
+    private void menuParticipantes() {//seccion 2
         System.out.println("\n--- ADMINISTRACIÓN DE PARTICIPANTES ---");
         System.out.println("1. Registrar participante\n2. Consultar si está inscrito");
         System.out.println("3. Mostrar listado de participantes\n0. Regresar");
@@ -116,8 +114,8 @@ public class MenuConsola {
         }
     }
 
-    // ---------- Sección 3 ----------
-    private void menuCalendario() {
+
+    private void menuCalendario() {//seccion 3
         System.out.println("\n--- CALENDARIO DE EVENTOS ---");
         System.out.println("1. Registrar evento\n2. Mostrar eventos ordenados\n3. Buscar un evento");
         System.out.println("4. Recorrer el árbol\n0. Regresar");
@@ -179,7 +177,6 @@ public class MenuConsola {
         return scanner.nextLine();
     }
 
-    /** Lee un entero dentro del rango; si no es válido vuelve a preguntar. */
     private int leerEntero(String mensaje, int minimo, int maximo) {
         while (true) {
             System.out.print(mensaje);
@@ -189,7 +186,7 @@ public class MenuConsola {
                     return numero;
                 }
             } catch (NumberFormatException e) {
-                // cae al mensaje de error de abajo
+
             }
             System.out.println("Entrada inválida. Escribe un número entre " + minimo + " y " + maximo + ".");
         }

@@ -5,10 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Representa un evento académico (conferencia, taller, seminario o concurso).
- * Cada evento guarda su propio CONJUNTO (Set) de participantes.
- */
 public class Evento {
 
     public static final DateTimeFormatter FORMATO_FECHA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -40,7 +36,6 @@ public class Evento {
     public void setResponsable(String responsable) { this.responsable = responsable; }
     public void setLugar(String lugar) { this.lugar = lugar; }
 
-    /** Regresa true si se agregó; false si ya estaba inscrito (el Set lo rechaza). */
     public boolean agregarParticipante(String nombreParticipante) {
         return participantes.add(nombreParticipante);
     }
@@ -49,7 +44,6 @@ public class Evento {
         return participantes.contains(nombreParticipante);
     }
 
-    /** Regresa una copia para que nadie modifique el conjunto original desde afuera. */
     public Set<String> getParticipantes() {
         return new HashSet<>(participantes);
     }

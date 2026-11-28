@@ -14,12 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Lógica del sistema. Usa tres estructuras, cada una para lo que mejor sirve:
- *  - Diccionario (Map): eventos por clave (sección 1).
- *  - Conjunto (Set): participantes sin repetir, dentro de cada Evento (sección 2).
- *  - Árbol (BST): eventos ordenados por nombre y por fecha (sección 3).
- */
 public class GestorEventos {
 
     // LinkedHashMap es un Map que además recuerda el orden en que se registraron
@@ -30,7 +24,7 @@ public class GestorEventos {
     private static final DateTimeFormatter FORMATO_ENTRADA =
             DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
 
-    // ---------- Sección 1: Diccionario (Map) ----------
+
 
     public Evento registrarEvento(String clave, String nombre, String fechaTexto,
                                   String responsable, String lugar) {
@@ -83,7 +77,6 @@ public class GestorEventos {
         return eventos.size();
     }
 
-    // ---------- Sección 2: Conjunto (Set) ----------
 
     /** Regresa true si se registró; false si ese participante ya estaba inscrito. */
     public boolean registrarParticipante(String claveEvento, String nombre) {
@@ -100,7 +93,6 @@ public class GestorEventos {
         return consultarEvento(claveEvento).getParticipantes();
     }
 
-    // ---------- Sección 3: Árbol binario de búsqueda ----------
 
     private ArbolEventos arbolDe(Criterio criterio) {
         return criterio == Criterio.NOMBRE ? arbolPorNombre : arbolPorFecha;
@@ -110,7 +102,7 @@ public class GestorEventos {
         return arbolDe(criterio).inorden();
     }
 
-    /** Busca en el árbol por nombre exacto o por fecha (dd/MM/aaaa). */
+
     public List<Evento> buscarEnCalendario(Criterio criterio, String texto) {
         if (criterio == Criterio.NOMBRE) {
             validarTexto(texto, "El nombre a buscar");
@@ -119,7 +111,6 @@ public class GestorEventos {
         return arbolDe(criterio).buscar(convertirFecha(texto));
     }
 
-    /** tipo: 1 = inorden, 2 = preorden, 3 = postorden. */
     public List<Evento> recorrerArbol(Criterio criterio, int tipo) {
         ArbolEventos arbol = arbolDe(criterio);
         switch (tipo) {
@@ -133,7 +124,7 @@ public class GestorEventos {
         return arbolDe(criterio).altura();
     }
 
-    // ---------- Datos de ejemplo ----------
+    //
 
     public void cargarDatosEjemplo() {
         String[][] datos = {
@@ -155,7 +146,6 @@ public class GestorEventos {
         registrarParticipante("EV02", "Pedro Ramírez");
     }
 
-    // ---------- Apoyo ----------
 
     private void reconstruirArboles() {
         arbolPorNombre.limpiar();
@@ -171,7 +161,6 @@ public class GestorEventos {
         return clave.trim().toUpperCase();
     }
 
-    /** "  ana   torres " -> "Ana Torres", así "ana torres" y "Ana Torres" cuentan como el mismo. */
     private String normalizarNombre(String texto) {
         String[] palabras = texto.trim().split("\\s+");
         StringBuilder resultado = new StringBuilder();

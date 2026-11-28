@@ -4,18 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Árbol binario de búsqueda (BST) hecho a mano para guardar eventos ordenados.
- * Un árbol se crea para un criterio: por NOMBRE o por FECHA.
- *
- * Regla: lo menor va a la izquierda; lo igual o mayor va a la derecha.
- * Por eso, al recorrerlo "en inorden" los eventos salen ordenados.
- */
 public class ArbolEventos {
 
     public enum Criterio { NOMBRE, FECHA }
-
-    /** Cada nodo guarda un evento y apunta a su hijo izquierdo y derecho. */
     private static class Nodo {
         Evento dato;
         Nodo izquierdo;
@@ -38,13 +29,13 @@ public class ArbolEventos {
     public int size() { return tamanio; }
     public boolean estaVacio() { return raiz == null; }
 
-    /** Vacía el árbol (se usa antes de reconstruirlo). */
+
     public void limpiar() {
         raiz = null;
         tamanio = 0;
     }
 
-    /** Inserta un evento en su lugar correcto. */
+
     public void insertar(Evento evento) {
         raiz = insertar(raiz, evento);
         tamanio++;
@@ -62,10 +53,6 @@ public class ArbolEventos {
         return actual;
     }
 
-    /**
-     * Busca todos los eventos que coincidan con la clave.
-     * La clave es un String si el criterio es NOMBRE, o un LocalDate si es FECHA.
-     */
     public List<Evento> buscar(Object clave) {
         List<Evento> encontrados = new ArrayList<>();
         buscar(raiz, clave, encontrados);
@@ -87,7 +74,6 @@ public class ArbolEventos {
         }
     }
 
-    /** Inorden: izquierda, nodo, derecha. Devuelve los eventos ORDENADOS. */
     public List<Evento> inorden() {
         List<Evento> lista = new ArrayList<>();
         inorden(raiz, lista);
@@ -101,7 +87,6 @@ public class ArbolEventos {
         inorden(nodo.derecho, lista);
     }
 
-    /** Preorden: nodo, izquierda, derecha. */
     public List<Evento> preorden() {
         List<Evento> lista = new ArrayList<>();
         preorden(raiz, lista);
@@ -115,7 +100,7 @@ public class ArbolEventos {
         preorden(nodo.derecho, lista);
     }
 
-    /** Postorden: izquierda, derecha, nodo. */
+
     public List<Evento> postorden() {
         List<Evento> lista = new ArrayList<>();
         postorden(raiz, lista);
@@ -129,7 +114,6 @@ public class ArbolEventos {
         lista.add(nodo.dato);
     }
 
-    /** Altura del árbol (cuántos niveles tiene). */
     public int altura() {
         return altura(raiz);
     }
@@ -139,7 +123,6 @@ public class ArbolEventos {
         return 1 + Math.max(altura(nodo.izquierdo), altura(nodo.derecho));
     }
 
-    /** Compara dos eventos según el criterio del árbol. */
     private int compararEventos(Evento a, Evento b) {
         if (criterio == Criterio.NOMBRE) {
             return a.getNombre().compareToIgnoreCase(b.getNombre());
@@ -147,7 +130,6 @@ public class ArbolEventos {
         return a.getFecha().compareTo(b.getFecha());
     }
 
-    /** Compara una clave de búsqueda contra un evento. */
     private int compararConClave(Object clave, Evento evento) {
         if (criterio == Criterio.NOMBRE) {
             return ((String) clave).compareToIgnoreCase(evento.getNombre());
