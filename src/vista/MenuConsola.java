@@ -24,17 +24,12 @@ public class MenuConsola {
             System.out.println("1. Administración de eventos");
             System.out.println("2. Administración de participantes");
             System.out.println("3. Calendario de eventos");
-            System.out.println("4. Cargar datos de ejemplo");
             System.out.println("0. Salir");
             opcion = leerEntero("Elige una opción: ", 0, 4);
             switch (opcion) {
                 case 1: menuEventos(); break;
                 case 2: menuParticipantes(); break;
                 case 3: menuCalendario(); break;
-                case 4:
-                    gestor.cargarDatosEjemplo();
-                    System.out.println("Datos de ejemplo cargados. Eventos registrados: " + gestor.cantidadEventos());
-                    break;
                 case 0: System.out.println("¡Hasta pronto!"); break;
             }
         } while (opcion != 0);
